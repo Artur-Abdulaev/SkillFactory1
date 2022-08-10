@@ -6,6 +6,9 @@ public class Squirrel_v2 {
         System.out.println(s.maxNuts());
         Squirrel_v1 s2 = new Squirrel_v1(new int[]{1, -2, 3, 1, -1, -4, 2, 3});
         s2.maxNuts();
+        s2.maxNuts();
+        s2.maxNuts();
+        s2.maxNuts();
     }
 
     private int[] nuts;
