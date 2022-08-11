@@ -7,6 +7,7 @@ public class Loader {
             System.out.println("Value i = " + i);
         } while (i > 1);
 
+        System.out.println("finish");
 
     }
 }
