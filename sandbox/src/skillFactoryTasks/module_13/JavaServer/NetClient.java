@@ -1,3 +1,5 @@
+package skillFactoryTasks.module_13.JavaServer;
+
 import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.KeyEvent;

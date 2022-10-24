@@ -80,14 +80,56 @@ public class ReadingExcel {
         inputStream.close();
     }
 
-    public static String ExcelReader(String link) throws IOException {
+    public static StringBuilder excelReaderActualOffices(String link) throws IOException {
         String excelFilePath = link;
         FileInputStream inputStream = new FileInputStream(excelFilePath);
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         XSSFSheet sheet = workbook.getSheetAt(0);
 
         Iterator iterator = sheet.iterator();
-        String s = "";
+
+        StringBuilder sb = new StringBuilder("");
+        boolean isNum = false;
+        boolean check = false;
+        int count = 0;
+        while (iterator.hasNext()) {
+            XSSFRow row = (XSSFRow) iterator.next();
+            Iterator cellIterator = row.cellIterator();
+            while (cellIterator.hasNext()) {
+                XSSFCell cell = (XSSFCell) cellIterator.next();
+                switch (cell.getCellType()) {
+                    case STRING:
+                        sb.append(cell.getStringCellValue()).append("\t");
+                        break;
+                    case NUMERIC:
+                        if (count < 2) {
+                            sb.append(cell.getNumericCellValue()).append("\t");
+                            count++;
+                        } else {
+                            sb.append(cell.getNumericCellValue()).append("\n");
+                            count = 0;
+                        }
+                        break;
+                    case BOOLEAN:
+                        System.out.print(cell.getBooleanCellValue());
+                        break;
+                }
+            }
+        }
+
+        return sb;
+    }
+
+    public static StringBuilder excelReaderPotentialOffices(String link) throws IOException {
+        String excelFilePath = link;
+        FileInputStream inputStream = new FileInputStream(excelFilePath);
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+
+        Iterator iterator = sheet.iterator();
+
+        StringBuilder sb = new StringBuilder("");
+
         boolean isNum = false;
         while (iterator.hasNext()) {
             XSSFRow row = (XSSFRow) iterator.next();
@@ -96,14 +138,16 @@ public class ReadingExcel {
                 XSSFCell cell = (XSSFCell) cellIterator.next();
                 switch (cell.getCellType()) {
                     case STRING:
-                        s += cell.getStringCellValue() + "\t";
+
+                        sb.append(cell.getStringCellValue()).append("\t");
+
                         break;
                     case NUMERIC:
                         if (!isNum) {
-                            s += String.valueOf(cell.getNumericCellValue()) + "\t";
+                            sb.append(cell.getNumericCellValue()).append("\t");
                             isNum = true;
                         } else {
-                            s += String.valueOf(cell.getNumericCellValue()) + "\n";
+                            sb.append(cell.getNumericCellValue()).append("\n");
                             isNum = false;
                         }
                         break;
@@ -113,7 +157,8 @@ public class ReadingExcel {
                 }
             }
         }
-        return s;
+
+        return sb;
     }
 
 

@@ -6,6 +6,7 @@ public class DistanceData implements Comparable<DistanceData> {
     public final double Distance;
     public final String Solution;
 
+
     @Override
     public String toString() {
         return Distance + " ( " + Actual.toString() + " : " + Potential.toString() + " )\n";
@@ -16,9 +17,11 @@ public class DistanceData implements Comparable<DistanceData> {
         this.Potential = potential;
         this.Distance = getDistanceBetween(actual, potential);
 
-        if (this.Distance > 500) {
+        if (this.Distance > 450) {
             Solution = "Да";
         } else Solution = "Нет";
+
+
     }
 
     public static double getDistanceBetween(OfficeAddress a1, OfficeAddress a2) {

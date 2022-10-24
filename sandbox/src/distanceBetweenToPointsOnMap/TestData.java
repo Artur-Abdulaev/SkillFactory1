@@ -2,23 +2,24 @@ package distanceBetweenToPointsOnMap;
 
 import java.io.IOException;
 
-import static distanceBetweenToPointsOnMap.apachePOI.ReadingExcel.ExcelReader;
+import static distanceBetweenToPointsOnMap.apachePOI.ReadingExcel.excelReaderActualOffices;
+import static distanceBetweenToPointsOnMap.apachePOI.ReadingExcel.excelReaderPotentialOffices;
 
 class TestData {
 
-    static String actualOffice;
-    static String potentialOffice;
+    static StringBuilder actualOffice;
+    static StringBuilder potentialOffice;
     static {
         try {
-            potentialOffice = ExcelReader("C:/Users/À/Desktop/ExcelForPOI/PotentialOffices.xlsx");
-            actualOffice = ExcelReader("C:/Users/À/Desktop/ExcelForPOI/ActualOffices.xlsx");
+            potentialOffice = excelReaderPotentialOffices("C:/Users/À/Desktop/ExcelForPOI/PotentialOffices.xlsx");
+            actualOffice = excelReaderActualOffices("C:/Users/À/Desktop/ExcelForPOI/ActualOffices.xlsx");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static String ActualOfficesRawData = actualOffice;
-    public static String PotentialOfficesRawData = potentialOffice;
+    public static StringBuilder ActualOfficesRawData = actualOffice;
+    public static StringBuilder PotentialOfficesRawData = potentialOffice;
 
 
 }
